@@ -1,25 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import { useContext } from "react";
+import styled from "styled-components";
+import Calculator from "./components/calculator/Calculator";
+import Header from "./components/header/Header";
+import { GlobalStyle } from "./store/Subject";
 
 function App() {
+  const { state } = useContext(GlobalStyle);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Conteiner>
+      <Header />
+      <main className={state === true ? "mainSun" : "mainMoon"}>
+        <Calculator />
+      </main>
+    </Conteiner>
   );
 }
 
 export default App;
+
+const Conteiner = styled.div`
+  .mainSun {
+    width: 100%;
+    height: 100vh;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .mainMoon {
+    width: 100%;
+    height: 100vh;
+    background-color: #000000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+`;
