@@ -1,11 +1,10 @@
-import React, { useContext } from "react";
+import React, { memo, useContext } from "react";
 import styled from "styled-components";
 import { RiSunFill, RiMoonFill } from "react-icons/ri";
 import { GlobalStyle } from "../../store/Subject";
 
 function Header() {
   const { state, sunHandler, moonHandler } = useContext(GlobalStyle);
-
   return (
     <StyledHeader>
       <StyledNav className={state === true ? "navSun" : "navMoon"}>
@@ -24,7 +23,7 @@ function Header() {
   );
 }
 
-export default Header;
+export default memo(Header);
 
 const StyledHeader = styled.header`
   .navSun {

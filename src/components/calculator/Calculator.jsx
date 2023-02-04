@@ -1,4 +1,4 @@
-import React, { useContext, useReducer, useState } from "react";
+import React, { useCallback, useContext, useReducer, useState } from "react";
 import styled from "styled-components";
 import { GlobalStyle } from "../../store/Subject";
 import { BiMinus } from "react-icons/bi";
@@ -45,34 +45,34 @@ function Calculator() {
 
   const plusHandler = (event) => {
     event.preventDefault();
-    dispatch({ type: ACTION_TYPES.PLUS, payload: value });
+    if (value !== "") dispatch({ type: ACTION_TYPES.PLUS, payload: value });
   };
 
   const minusHandler = (event) => {
     event.preventDefault();
-    dispatch({ type: ACTION_TYPES.MINUS, payload: value });
+    if (value !== "") dispatch({ type: ACTION_TYPES.MINUS, payload: value });
   };
 
   const multiplyHandler = (event) => {
     event.preventDefault();
-    dispatch({ type: ACTION_TYPES.MULTIPLY, payload: value });
+    if (value !== "") dispatch({ type: ACTION_TYPES.MULTIPLY, payload: value });
   };
 
   const divideHandler = (event) => {
     event.preventDefault();
-    dispatch({ type: ACTION_TYPES.DIVIDE, payload: value });
+    if (value !== "") dispatch({ type: ACTION_TYPES.DIVIDE, payload: value });
   };
 
   const clear = (event) => {
     event.preventDefault();
     setValue("");
-    dispatch({ type: ACTION_TYPES.CLEAR });
+    if (value !== "") dispatch({ type: ACTION_TYPES.CLEAR });
   };
 
   return (
     <Contiener>
       <Form className={state === true ? "formSun" : "formMoon"}>
-        <Result>{result}</Result>
+        <Result className={value !== "" ? "result" : "zero"}>{result}</Result>
         <div>
           <Input value={value} onChange={inputValueHandler} />
         </div>
